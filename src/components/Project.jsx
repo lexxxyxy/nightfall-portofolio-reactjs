@@ -1,13 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import anime from "animejs";
 
 const Projects = () => {
   const projectsRef = useRef(null);
   const observerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleScrollEnter = (entries) => {
+  const handleScroll = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        setIsVisible(true);
+
+        // Animasi muncul
         anime({
           targets: ".projects h2",
           translateY: [-50, 0],
@@ -16,7 +20,6 @@ const Projects = () => {
           duration: 1000,
         });
 
-        // Animasi project cards (satu per satu)
         anime({
           targets: ".project-card",
           translateY: [50, 0],
@@ -26,17 +29,32 @@ const Projects = () => {
           easing: "easeOutCubic",
           duration: 800,
         });
+      } else {
+        setIsVisible(false);
 
-        // Hentikan observasi setelah animasi selesai
-        if (observerRef.current) {
-          observerRef.current.unobserve(entry.target);
-        }
+        // Animasi hilang
+        anime({
+          targets: ".projects h2",
+          translateY: [0, -30],
+          opacity: [1, 0],
+          easing: "easeInCubic",
+          duration: 500,
+        });
+
+        anime({
+          targets: ".project-card",
+          translateY: [0, 50],
+          opacity: [1, 0],
+          delay: anime.stagger(100),
+          easing: "easeInCubic",
+          duration: 400,
+        });
       }
     });
   };
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(handleScrollEnter, {
+    observerRef.current = new IntersectionObserver(handleScroll, {
       threshold: 0.3,
     });
 
@@ -53,27 +71,23 @@ const Projects = () => {
 
   return (
     <section id="projects" className="projects" ref={projectsRef}>
-      <h2>📁 Projects</h2>
+      <h2 style={{ opacity: 0 }}>📁 Projects</h2>
       <div className="projects-list">
-        <div className="project-card">
-          <h3>Nightfall Portfolio</h3>
-          <p>A personal portfolio built with elegance using React and CSS.</p>
-        </div>
-
-        <div className="project-card">
-          <h3>Chill To-Do App</h3>
-          <p>A minimalist to-do app with a chill UI and smooth animations.</p>
-        </div>
-
-        <div className="project-card">
-          <h3>Portfolio V2</h3>
-          <p>Second version of my portfolio with added scroll animation.</p>
-        </div>
-
-        <div className="project-card">
-          <h3>Trading Dashboard</h3>
-          <p>Dashboard for tracking trading data with clean and responsive design.</p>
-        </div>
+        {[
+          { title: "Nightfall Portfolio", desc: "A personal portfolio built with elegance using React and CSS." },
+          { title: "Chill To-Do App", desc: "A minimalist to-do app with a chill UI and smooth animations." },
+          { title: "Portfolio V2", desc: "Second version of my portfolio with added scroll animation." },
+          { title: "Trading Dashboard", desc: "Dashboard for tracking trading data with clean and responsive design." },
+        ].map((project, index) => (
+          <div
+            className="project-card"
+            key={index}
+            style={{ opacity: 0, transform: "translateY(50px)" }}
+          >
+            <h3>{project.title}</h3>
+            <p>{project.desc}</p>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -37,7 +37,7 @@ const Game = () => {
             translateY: [-50, 0],
             opacity: [0, 1],
             easing: 'easeOutQuad',
-            duration: 1000,
+            duration: 500,
           });
 
           anime({
@@ -46,7 +46,7 @@ const Game = () => {
             translateY: [50, 0],
             delay: anime.stagger(200),
             easing: 'easeOutQuad',
-            duration: 800,
+            duration: 350,
           });
         } else {
           anime({
@@ -54,7 +54,7 @@ const Game = () => {
             translateY: [0, -50],
             opacity: [1, 0],
             easing: 'easeOutQuad',
-            duration: 500,
+            duration: 300,
           });
 
           anime({
@@ -63,7 +63,7 @@ const Game = () => {
             translateY: [0, 50],
             delay: anime.stagger(100),
             easing: 'easeOutQuad',
-            duration: 500,
+            duration: 300,
           });
         }
       });
