@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,13 +12,6 @@ const Navbar = () => {
     return false;
   });
 
-  const navLinksRef = useRef(null);
-
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
-
   // Simpan ke localStorage dan tambahkan kelas ke body
   useEffect(() => {
     if (darkMode) {
@@ -29,6 +22,10 @@ const Navbar = () => {
       localStorage.setItem('darkMode', 'false');
     }
   }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
 
   return (
     <>
@@ -66,6 +63,7 @@ const Navbar = () => {
           max-width: 1100px;
           margin: auto;
           padding: 1rem 1.5rem;
+          position: relative;
         }
 
         .logo a {
@@ -142,8 +140,19 @@ const Navbar = () => {
           color: var(--text-color);
           font-size: 1.2rem;
           cursor: pointer;
-          margin-left: 1rem;
           transition: color var(--transition-speed) ease;
+          position: absolute;
+          left: 120px; /* Sesuaikan sesuai lebar logo */
+          bottom: -40px;
+          white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+          .mode-toggle {
+            left: 50px; /* Lebih ke kiri untuk mobile */
+            bottom: -40px;
+            font-size: 1rem;
+          }
         }
       `}</style>
 
@@ -153,8 +162,19 @@ const Navbar = () => {
             <a href="#home">Nightfall</a>
           </h1>
 
+          {/* Hamburger Button */}
+          <button
+            className="menu-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
           {/* Nav Links */}
-          <ul ref={navLinksRef} className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
+          <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
             <li>
               <a href="#home" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
             </li>
@@ -170,7 +190,9 @@ const Navbar = () => {
             <li>
               <a href="#game" onClick={() => setIsMobileMenuOpen(false)}>Fav Game</a>
             </li>
-              {/* Dark Mode Toggle */}
+          </ul>
+
+          {/* Dark Mode Toggle - Ditempatkan di pojok kiri bawah navbar */}
           <button
             className="mode-toggle"
             onClick={toggleDarkMode}
@@ -178,20 +200,6 @@ const Navbar = () => {
           >
             {darkMode ? '☀️ Light' : '🌙 Dark'}
           </button>
-          </ul>
-
-          {/* Hamburger Button */}
-          <button
-            className="menu-toggle"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-expanded={isMobileMenuOpen}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
-        
         </div>
       </nav>
     </>
