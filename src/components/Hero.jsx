@@ -34,15 +34,14 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-text">
           <h1>
-            Hi, I'm <span>Nightfall</span>
+            Hi,Saya <span>Nightfall</span>
           </h1>
           <p className="subtitle">
-            A curious and dedicated developer exploring the magic of web
-            development and card tricks.
+          Halo! Saya Nightfall, seorang front-end developer yang suka ngulik React, Tailwind, dan animasi interaktif.  
           </p>
           <p>
-            From HTML, CSS, JavaScript to React and backend adventures — always
-            learning, building, experimenting with passion.
+          Saya juga suka ngoprek game, terutama seri Assassin's Creed dan Detroit: Become Human.  
+          Tujuan saya adalah membangun website yang interaktif, cepat, dan enak dilihat.
           </p>
         </div>
       </div>

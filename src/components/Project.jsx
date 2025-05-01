@@ -11,31 +11,28 @@ const Projects = () => {
       if (entry.isIntersecting) {
         setIsVisible(true);
 
-        // Animasi muncul
         anime({
           targets: ".projects h2",
-          translateY: [-50, 0],
+          translateX: [-100, 0],
           opacity: [0, 1],
-          easing: "easeOutCubic",
-          duration: 1000,
+          easing: "easeOutQuart",
+          duration: 900,
         });
 
         anime({
           targets: ".project-card",
-          translateY: [50, 0],
+          translateX: [100, 0],
           opacity: [0, 1],
-          scale: [0.95, 1],
-          delay: anime.stagger(200),
-          easing: "easeOutCubic",
+          delay: anime.stagger(250),
+          easing: "easeOutExpo",
           duration: 800,
         });
       } else {
         setIsVisible(false);
 
-        // Animasi hilang
         anime({
           targets: ".projects h2",
-          translateY: [0, -30],
+          translateX: [0, -50],
           opacity: [1, 0],
           easing: "easeInCubic",
           duration: 500,
@@ -43,7 +40,7 @@ const Projects = () => {
 
         anime({
           targets: ".project-card",
-          translateY: [0, 50],
+          translateX: [0, 100],
           opacity: [1, 0],
           delay: anime.stagger(100),
           easing: "easeInCubic",
@@ -69,21 +66,44 @@ const Projects = () => {
     };
   }, []);
 
+  const projectData = [
+    {
+      title: "Portfolio V1",
+      desc: "A personal portfolio built with elegance using React and CSS.",
+      img: "https://xyxy-lex.vercel.app/images/project-3.png",
+    },
+    {
+      title: "Portfolio V2",
+      desc: "Second version of my portfolio with added scroll animation.",
+      img: "https://xyxy-lex.vercel.app/images/project-1.png",
+    },
+    {
+      title: "Rexus Store",
+      desc: "A minimalist shop with a chill UI and smooth animations.",
+      img: "https://xyxy-lex.vercel.app/images/project-2.png",
+    },
+    {
+      title: "Trading Dashboard",
+      desc: "Dashboard for tracking trading data with clean and responsive design.",
+      img: "https://xyxy-lex.vercel.app/images/project-4.png",
+    },
+  ];
+
   return (
     <section id="projects" className="projects" ref={projectsRef}>
       <h2 style={{ opacity: 0 }}>📁 Projects</h2>
       <div className="projects-list">
-        {[
-          { title: "Nightfall Portfolio", desc: "A personal portfolio built with elegance using React and CSS." },
-          { title: "Chill To-Do App", desc: "A minimalist to-do app with a chill UI and smooth animations." },
-          { title: "Portfolio V2", desc: "Second version of my portfolio with added scroll animation." },
-          { title: "Trading Dashboard", desc: "Dashboard for tracking trading data with clean and responsive design." },
-        ].map((project, index) => (
+        {projectData.map((project, index) => (
           <div
             className="project-card"
             key={index}
-            style={{ opacity: 0, transform: "translateY(50px)" }}
+            style={{ opacity: 0, transform: "translateX(100px)" }}
           >
+            <img
+              src={project.img}
+              alt={project.title}
+              style={{ width: "100%", height: "auto", borderRadius: "12px" }}
+            />
             <h3>{project.title}</h3>
             <p>{project.desc}</p>
           </div>
