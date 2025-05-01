@@ -1,60 +1,52 @@
+/* === GLOBAL THEMING VARIABLES === */
+:root {
+  --bg-color: #f5f5f5;
+  --text-color: #333;
+  --section-bg: #f8f0e5;
+  --card-bg: #fff;
+  --accent-color: #e60012;
+  --footer-bg: #f0e8dc;
+  --link-hover: #a57c6e;
+  --transition-speed: 0.4s;
+}
+
+.dark {
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+  --section-bg: #1e1e1e;
+  --card-bg: #2a2a2a;
+  --accent-color: #ff6b6b;
+  --footer-bg: #292929;
+  --link-hover: #d1a054;
+}
+
 /* General Styles */
 * {
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Noto Sans JP', sans-serif; /* Font Jepang */
-  background-color: #f5f5f5;
-  color: #333;
+  font-family: "Noto Sans JP", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
-h1, h2, h3, p {
+h1,
+h2,
+h3,
+p {
   margin: 0;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  transition: color var(--transition-speed) ease;
 }
 
-
-
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .nav-links {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background-color: #fffaf0;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .nav-links.active {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .mobile-menu-overlay {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: transparent;
-    z-index: 999;
-  }
-}
 .nav-links li a:hover::after {
   width: 100%;
 }
@@ -99,7 +91,7 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
   z-index: -1;
 }
 
@@ -119,11 +111,11 @@ a {
   font-size: 3rem;
   margin-bottom: 1rem;
   color: #fefefe;
-  font-family: 'Sawarabi Mincho', serif; 
+  font-family: "Sawarabi Mincho", serif;
 }
 
 .hero-text h1 span {
-  color: #e60012;
+  color: var(--accent-color);
   font-weight: bold;
 }
 
@@ -158,24 +150,24 @@ a {
   transform: scale(1.03);
 }
 
-/* === SKILLS SECTION  */
+/* === SKILLS SECTION === */
 .skills {
   padding: 80px 20px;
-  background-color: #fffaf0; 
+  background-color: var(--section-bg);
   text-align: center;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 .skills h2 {
   font-size: 2.5rem;
   margin-bottom: 40px;
-  color: #4b3625; 
-  font-family: 'Sawarabi Mincho', serif;
+  color: #4b3625;
+  font-family: "Sawarabi Mincho", serif;
   position: relative;
 }
 
 .skills h2::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 3px;
@@ -187,7 +179,7 @@ a {
 .skill-card {
   cursor: pointer;
   display: inline-block;
-  background-color: #fff;
+  background-color: var(--card-bg);
   border: 1px solid #e0d7d0;
   border-radius: 12px;
   padding: 20px;
@@ -211,24 +203,25 @@ a {
   font-size: 0.9rem;
   color: #888;
 }
-/* === PROJECTS SECTION */
+
+/* === PROJECTS SECTION === */
 .projects {
-  background-color: #f8f0e5; 
+  background-color: var(--section-bg);
   padding: 60px 20px;
   text-align: center;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 .projects h2 {
   font-size: 2rem;
   margin-bottom: 40px;
   color: #4b3625;
-  font-family: 'Sawarabi Mincho', serif;
+  font-family: "Sawarabi Mincho", serif;
   position: relative;
 }
 
 .projects h2::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 3px;
@@ -239,7 +232,7 @@ a {
 
 .project-card {
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   border-radius: 12px;
   padding: 20px;
   margin: 15px auto;
@@ -267,7 +260,7 @@ a {
 
 .project-card .tech-stack {
   font-size: 0.85rem;
-  color: #a57c6e;
+  color: var(--link-hover);
 }
 
 .projects-list {
@@ -279,14 +272,14 @@ a {
 }
 
 .project-card {
-  flex: 1 1 300px; 
+  flex: 1 1 300px;
   max-width: 350px;
 }
 
 /* === CONTACT SECTION === */
 .contact {
   padding: 80px 20px;
-  background-color: #fefefe;
+  background-color: var(--section-bg);
   text-align: center;
 }
 
@@ -299,9 +292,9 @@ a {
 /* === GAME SECTION === */
 .game-section {
   padding: 60px 20px;
-  background: #f8f0e5;
+  background: var(--section-bg);
   text-align: center;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 .game-title {
@@ -318,7 +311,7 @@ a {
 }
 
 .game-card {
-  background: #fff;
+  background: var(--card-bg);
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   max-width: 280px;
@@ -354,20 +347,19 @@ a {
   color: #666;
 }
 
-
 /* Contact Section */
 .contact {
   padding: 80px 20px;
-  background-color: #f5f5f5;
+  background-color: var(--section-bg);
   text-align: center;
-  font-family: 'Yu Gothic UI', sans-serif;
-  color: #333;
+  font-family: "Yu Gothic UI", sans-serif;
+  color: var(--text-color);
 }
 
 .contact h2 {
   font-size: 2.5rem;
   margin-bottom: 10px;
-  color: #5a2d00; 
+  color: #5a2d00;
   font-weight: 700;
 }
 
@@ -383,7 +375,7 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -397,7 +389,7 @@ a {
   font-size: 1rem;
   background-color: #fefefe;
   transition: border-color 0.3s ease;
-  font-family: 'Yu Gothic UI', sans-serif;
+  font-family: "Yu Gothic UI", sans-serif;
 }
 
 .form-input:focus {
@@ -406,7 +398,7 @@ a {
 }
 
 .submit-btn {
-  background-color: #5a2d00;
+  background-color: var(--accent-color);
   color: white;
   border: none;
   padding: 14px;
@@ -417,7 +409,7 @@ a {
 }
 
 .submit-btn:hover {
-  background-color: #ff7a1d; 
+  background-color: #ff7a1d;
 }
 
 /* Animasi untuk elemen form */
@@ -437,15 +429,17 @@ a {
 }
 
 /* ==TESTIMONIALS== */
+/* ==TESTIMONIALS== */
 .testimonials {
   padding: 50px 10px;
-  background-color: #f9f9f9;
+  background-color: var(--section-bg);
 }
 
 .section-title {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 20px;
+  color: var(--text-color);
 }
 
 .testimonial-container {
@@ -457,30 +451,31 @@ a {
 
 .testimonial-card {
   opacity: 0;
-  transform: translateY(20px); /* Memulai dengan posisi lebih rendah */
+  transform: translateY(20px);
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   width: 80%;
   max-width: 600px;
-  visibility: hidden; /* Agar tidak muncul saat pertama kali */
+  visibility: hidden;
 }
 
 .testimonial-text {
   font-style: italic;
   font-size: 1.1rem;
-  color: #555;
+  color: var(--text-color);
 }
 
 .testimonial-name {
   font-weight: bold;
   margin-top: 10px;
+  color: var(--text-color);
 }
 
 .testimonial-job {
-  color: #777;
+  color: #bbb;
   font-size: 0.9rem;
 }
 
@@ -514,19 +509,20 @@ a {
     font-size: 1rem;
   }
 
-  .testimonial-name, .testimonial-job {
+  .testimonial-name,
+  .testimonial-job {
     font-size: 0.85rem;
   }
 }
 
-
+/* === FOOTER === */
 /* === FOOTER === */
 .footer {
-  background-color: #f0e8dc;
-  color: #4b3625;
+  background-color: var(--footer-bg);
+  color: var(--text-color); /* Warna teks utama disesuaikan */
   padding: 30px 20px;
   text-align: center;
-  font-family: 'Sawarabi Mincho', serif;
+  font-family: "Sawarabi Mincho", serif;
   border-top: 2px solid #e6d3c7;
 }
 
@@ -538,9 +534,10 @@ a {
 .footer .jp-text {
   font-size: 1.1rem;
   margin-bottom: 8px;
+  color: var(--text-color); /* Sesuaikan warna teks JP */
 }
 
 .footer .footer-name {
   font-size: 0.95rem;
-  color: #7c5e45;
+  color: var(--link-hover); /* Gunakan warna aksen agar lebih jelas */
 }
