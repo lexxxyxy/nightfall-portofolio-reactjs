@@ -189,10 +189,6 @@ const Navbar = () => {
             </li>
             <li>
               <a href="#game" onClick={() => setIsMobileMenuOpen(false)}>Fav Game</a>
-            </li>
-          </ul>
-
-          {/* Dark Mode Toggle - Ditempatkan di pojok kiri bawah navbar */}
           <button
             className="mode-toggle"
             onClick={toggleDarkMode}
@@ -200,6 +196,10 @@ const Navbar = () => {
           >
             {darkMode ? '☀️ Light' : '🌙 Dark'}
           </button>
+            </li>
+          </ul>
+
+          {/* Dark Mode Toggle - Ditempatkan di pojok kiri bawah navbar */}
         </div>
       </nav>
     </>
