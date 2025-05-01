@@ -170,6 +170,14 @@ const Navbar = () => {
             <li>
               <a href="#game" onClick={() => setIsMobileMenuOpen(false)}>Fav Game</a>
             </li>
+              {/* Dark Mode Toggle */}
+          <button
+            className="mode-toggle"
+            onClick={toggleDarkMode}
+            aria-label="Toggle Dark Mode"
+          >
+            {darkMode ? '☀️ Light' : '🌙 Dark'}
+          </button>
           </ul>
 
           {/* Hamburger Button */}
@@ -183,14 +191,7 @@ const Navbar = () => {
             <span></span>
           </button>
 
-          {/* Dark Mode Toggle */}
-          <button
-            className="mode-toggle"
-            onClick={toggleDarkMode}
-            aria-label="Toggle Dark Mode"
-          >
-            {darkMode ? '☀️ Light' : '🌙 Dark'}
-          </button>
+        
         </div>
       </nav>
     </>
