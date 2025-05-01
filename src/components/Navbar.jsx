@@ -5,8 +5,10 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode !== null) return savedMode === 'true';
+
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
       return true;
+
     return false;
   });
 
@@ -110,7 +112,7 @@ const Navbar = () => {
             position: absolute;
             top: 100%;
             left: 0;
-            width: 100%;
+            right: 0;
             background-color: var(--bg-color);
             padding: 1rem 0;
           }
@@ -138,15 +140,17 @@ const Navbar = () => {
           font-size: 1.2rem;
           cursor: pointer;
           transition: color var(--transition-speed) ease;
-          margin-left: 1rem;
+          position: absolute;
+          left: 120px;
+          bottom: -40px;
+          white-space: nowrap;
         }
 
         @media (max-width: 768px) {
           .mode-toggle {
-            margin: 1rem 0 0 1.5rem;
+            left: 50px;
+            bottom: -40px;
             font-size: 1rem;
-            position: absolute;
-            top: 100%;
           }
         }
       `}</style>
@@ -161,6 +165,7 @@ const Navbar = () => {
             className="menu-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
+            aria-label="Toggle Menu"
           >
             <span></span>
             <span></span>
@@ -182,16 +187,18 @@ const Navbar = () => {
             </li>
             <li>
               <a href="#game" onClick={() => setIsMobileMenuOpen(false)}>Fav Game</a>
+              <button
+                className="mode-toggle"
+                onClick={() => {
+                  toggleDarkMode();
+                  setIsMobileMenuOpen(false);
+                }}
+                aria-label="Toggle Dark Mode"
+              >
+                {darkMode ? '☀️ Light' : '🌙 Dark'}
+              </button>
             </li>
           </ul>
-
-          <button
-            className="mode-toggle"
-            onClick={toggleDarkMode}
-            aria-label="Toggle Dark Mode"
-          >
-            {darkMode ? '☀️ Light' : '🌙 Dark'}
-          </button>
         </div>
       </nav>
     </>
