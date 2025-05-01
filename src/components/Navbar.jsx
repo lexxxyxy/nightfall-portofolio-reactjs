@@ -5,14 +5,11 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode !== null) return savedMode === 'true';
-
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
       return true;
-
     return false;
   });
 
-  // Simpan ke localStorage dan tambahkan kelas ke body
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark');
@@ -113,7 +110,7 @@ const Navbar = () => {
             position: absolute;
             top: 100%;
             left: 0;
-            right: 0;
+            width: 100%;
             background-color: var(--bg-color);
             padding: 1rem 0;
           }
@@ -141,17 +138,15 @@ const Navbar = () => {
           font-size: 1.2rem;
           cursor: pointer;
           transition: color var(--transition-speed) ease;
-          position: absolute;
-          left: 120px; /* Sesuaikan sesuai lebar logo */
-          bottom: -40px;
-          white-space: nowrap;
+          margin-left: 1rem;
         }
 
         @media (max-width: 768px) {
           .mode-toggle {
-            left: 50px; /* Lebih ke kiri untuk mobile */
-            bottom: -40px;
+            margin: 1rem 0 0 1.5rem;
             font-size: 1rem;
+            position: absolute;
+            top: 100%;
           }
         }
       `}</style>
@@ -162,7 +157,6 @@ const Navbar = () => {
             <a href="#home">Nightfall</a>
           </h1>
 
-          {/* Hamburger Button */}
           <button
             className="menu-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -173,7 +167,6 @@ const Navbar = () => {
             <span></span>
           </button>
 
-          {/* Nav Links */}
           <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
             <li>
               <a href="#home" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
@@ -189,6 +182,9 @@ const Navbar = () => {
             </li>
             <li>
               <a href="#game" onClick={() => setIsMobileMenuOpen(false)}>Fav Game</a>
+            </li>
+          </ul>
+
           <button
             className="mode-toggle"
             onClick={toggleDarkMode}
@@ -196,10 +192,6 @@ const Navbar = () => {
           >
             {darkMode ? '☀️ Light' : '🌙 Dark'}
           </button>
-            </li>
-          </ul>
-
-          {/* Dark Mode Toggle - Ditempatkan di pojok kiri bawah navbar */}
         </div>
       </nav>
     </>
