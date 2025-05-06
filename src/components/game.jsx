@@ -38,37 +38,14 @@ const Game = () => {
   ];
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            anime({
-              targets: '.game-title',
-              translateY: [-30, 0],
-              opacity: [0, 1],
-              duration: 600,
-              easing: 'easeOutBack',
-            });
-
-            anime({
-              targets: '.game-card',
-              scale: [0.95, 1],
-              opacity: [0, 1],
-              delay: anime.stagger(150),
-              duration: 500,
-              easing: 'easeOutExpo',
-            });
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (gameRef.current) observer.observe(gameRef.current);
-
-    return () => {
-      if (gameRef.current) observer.unobserve(gameRef.current);
-    };
+    anime({
+      targets: '.game-card',
+      translateY: [30, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(150),
+      duration: 800,
+      easing: 'easeOutQuad'
+    });
   }, []);
 
   return (

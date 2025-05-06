@@ -5,21 +5,12 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode !== null) return savedMode === 'true';
-
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      return true;
-
-    return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
-    } else {
-      document.body.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
-    }
+    document.body.classList.toggle('dark', darkMode);
+    localStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode]);
 
   const toggleDarkMode = () => {
@@ -44,9 +35,9 @@ const Navbar = () => {
 
         .navbar {
           position: fixed;
-          width: 100%;
           top: 0;
           left: 0;
+          width: 100%;
           z-index: 1000;
           background-color: var(--bg-color);
           color: var(--text-color);
@@ -62,7 +53,6 @@ const Navbar = () => {
           max-width: 1100px;
           margin: auto;
           padding: 1rem 1.5rem;
-          position: relative;
         }
 
         .logo a {
@@ -74,9 +64,9 @@ const Navbar = () => {
         }
 
         .menu-toggle {
+          display: none;
           width: 30px;
           height: 24px;
-          display: none;
           flex-direction: column;
           justify-content: space-between;
           background: none;
@@ -99,6 +89,28 @@ const Navbar = () => {
           list-style: none;
           margin: 0;
           padding: 0;
+          align-items: center;
+        }
+
+        .nav-links li a {
+          text-decoration: none;
+          color: var(--text-color);
+          font-size: 1rem;
+          transition: color var(--transition-speed) ease;
+        }
+
+        .nav-links li a:hover,
+        .mode-toggle:hover {
+          color: var(--link-hover);
+        }
+
+        .mode-toggle {
+          background: none;
+          border: none;
+          color: var(--text-color);
+          font-size: 1rem;
+          cursor: pointer;
+          transition: color var(--transition-speed) ease;
         }
 
         @media (max-width: 768px) {
@@ -120,37 +132,10 @@ const Navbar = () => {
           .nav-links.active {
             display: flex;
           }
-        }
 
-        .nav-links li a {
-          text-decoration: none;
-          color: var(--text-color);
-          font-size: 1rem;
-          transition: color var(--transition-speed) ease;
-        }
-
-        .nav-links li a:hover {
-          color: var(--link-hover);
-        }
-
-        .mode-toggle {
-          background: none;
-          border: none;
-          color: var(--text-color);
-          font-size: 1.2rem;
-          cursor: pointer;
-          transition: color var(--transition-speed) ease;
-          position: absolute;
-          left: 120px;
-          bottom: -40px;
-          white-space: nowrap;
-        }
-
-        @media (max-width: 768px) {
-          .mode-toggle {
-            left: 50px;
-            bottom: -40px;
-            font-size: 1rem;
+          .nav-links li {
+            padding: 0.5rem 0;
+            text-align: center;
           }
         }
       `}</style>
@@ -187,6 +172,8 @@ const Navbar = () => {
             </li>
             <li>
               <a href="#game" onClick={() => setIsMobileMenuOpen(false)}>Fav Game</a>
+            </li>
+            <li>
               <button
                 className="mode-toggle"
                 onClick={() => {
