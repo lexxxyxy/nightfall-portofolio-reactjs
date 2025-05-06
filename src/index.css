@@ -19,22 +19,33 @@
   --link-hover: #d1a054;
 }
 
-/* General Styles */
-* {
-  scroll-behavior: smooth;
-  box-sizing: border-box;
-}
-body {
+/* === LOCK HORIZONTAL SCROLL & RESPONSIVE FIXES === */
+html, body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+img, video, iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* General Styles */
+body {
   font-family: "Noto Sans JP", sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
-h1,
-h2,
-h3,
-p {
+h1, h2, h3, p {
   margin: 0;
   color: var(--text-color);
 }
@@ -46,7 +57,7 @@ a {
 .nav-links li a:hover::after {
   width: 100%;
 }
-/* HAMBURGER MENU */
+
 .menu-toggle {
   display: none;
   background: none;
@@ -335,7 +346,6 @@ a {
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
   transform: translateY(30px);
-  transition: transform 0.2s ease;
 }
 .game-card:hover {
   transform: scale(1.03);
@@ -441,6 +451,15 @@ a {
   .testimonial-name,
   .testimonial-job {
     font-size: 0.85rem;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-image {
+    order: -1;
   }
 }
 
